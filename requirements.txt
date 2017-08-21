@@ -1,0 +1,3 @@
+kivy==1.10.0
+Cython
+python2.7

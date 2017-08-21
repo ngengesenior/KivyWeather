@@ -1,0 +1,178 @@
+#:import SwapTransition kivy.uix.screenmanager.SwapTransition
+#:import Window kivy.core.window.Window
+#: import  get_color kivy.utils.get_color_from_hex
+<ScreenManagerInstance>:
+    transition:SwapTransition(duration=1)
+    launcher_prop:launcher
+    main_activity_prop:main_activity
+
+    Launcher:
+        name:'launcher'
+        id:launcher
+
+    MainActivity:
+        name:'main_activity'
+        id:main_activity
+
+<Launcher>:
+    spacing:10
+    padding:dp(40)
+    canvas:
+        Color:
+            rgba:1,1,1,0.5
+        BorderImage:
+            source:'images/back1.jpg'
+            pos:self.pos
+            size:self.size
+    FloatLayout:
+        Label:
+            markup:True
+            font_size:sp(20)
+            size_hint_y:None
+            height:dp(60)
+            text:'[b][color=00ff00]Daily[/color][/b] [b][color=00ffff]Weather[/color][/b]'
+            pos_hint:{'y':.9}
+
+        Label:
+            font_size:sp(17)
+            markup:True
+            pos_hint:{'y':.65}
+            text:root.get_text()
+            size_hint_y: None
+            text_size: self.width, None
+            height: self.texture_size[1]
+            halign:'center'
+        Button:
+            pos_hint:{'y':.2}
+            size_hint_y:None
+            height:dp(40)
+            text:'Go Check Weather'
+            on_press:root.manager.current='main_activity'
+
+
+<MainActivity>:
+    spacing:10
+    padding:10
+    canvas:
+        Color:
+            rgba:1,1,1,0.5
+        BorderImage:
+            size:self.size
+            pos:self.pos
+            source:'images/bg.png'
+    temperature:temp_val
+    pressure:pressure_val
+    wind_direction:wind_direction_val
+    wind_speed:wind_speed_val
+    sunrise:sunrise_val
+    sunset:sunset_val
+    latitude:latitude_val
+    longitude:longitude_val
+    humidity:humidity_val
+    lastBuildDate:lastBuildDate
+    description:description
+    BoxLayout:
+        orientation:'vertical'
+        spacing:10
+        padding:10
+        BoxLayout:
+            orientation:'horizontal'
+            size_hint_y:None
+            height:dp(45)
+        GridLayout:
+            cols:3
+            spacing:4
+            size_hint_y:None
+            height:dp(40)
+            Label:
+                text:'Search'
+            TextInput:
+                id:search_location
+            Button:
+                text:'Query'
+                on_press:root.get_weather(search_location.text)
+                on_release:search_location.text = ""
+        BoxLayout:
+            orientation:'horizontal'
+            size_hint_y:None
+            padding:10
+            height:dp(45)
+            Label:
+                id:description
+        ScrollView:
+            GridLayout:
+                cols:2
+                spacing:dp(20)
+                padding:dp(15)
+                size_hint_y:None
+                height:self.minimum_height
+                Lab:
+                    text:'Temperature'
+                    height:dp(200)
+                Disabled:
+                    height:dp(200)
+                    id:temp_val
+                    text:'70'
+                    font_size:sp(40)
+                Lab:
+                    text:'Pressure'
+                Disabled:
+                    text:'70'
+                    id:pressure_val
+                Lab:
+                    text:'Humidity'
+                Disabled:
+                    text:'70'
+                    id:humidity_val
+                Lab:
+                    text:'Wind Direction'
+                Disabled:
+                    text:'70'
+                    id:wind_direction_val
+
+                Lab:
+                    text:'Wind Speed'
+                Disabled:
+                    text:'4'
+                    id:wind_speed_val
+                Lab:
+                    text:'Sun Rise'
+
+                Disabled:
+                    text:'70'
+                    id:sunrise_val
+                Lab:
+                    text:'Sun Set'
+
+                Disabled:
+                    text:'70'
+                    id:sunset_val
+                Lab:
+                    text:'Latitude'
+                Disabled:
+                    text:'70'
+                    id:latitude_val
+                Lab:
+                    text:'Longitude'
+                Disabled:
+                    text:'70'
+                    id:longitude_val
+                Lab:
+                    text:'Last Build Date'
+                Disabled:
+                    text:''
+                    id:lastBuildDate
+
+
+
+<Lab@Label>:
+    markup:True
+    font_size:dp(20)
+    size_hint_y:None
+    height:dp(100)
+<Disabled@Label>:
+    disabled:True
+    size_hint_y:None
+    height:dp(100)
+    font_size:sp(25)
+<Button>:

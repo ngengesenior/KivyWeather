@@ -1,0 +1,6 @@
+## Kivy Weather
+This is a sample application that I wrote that uses a query from Yahoo weather
+Api which can be found at [this link](https://developer.yahoo.com/weather/).
+The app uses Kivy for the GUI display and for installing Kivy on your PC,
+check [the kivy website](https://www.kivy.org).
+The app requires internet connction as well.

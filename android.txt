@@ -1,0 +1,3 @@
+author=Ngenge Senior
+orientation=portrait
+title= Yahoo Weather

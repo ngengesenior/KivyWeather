@@ -1,0 +1,3 @@
+author=Ngenge Senior
+title=My Weather
+orientation=portrait
